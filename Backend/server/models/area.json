@@ -1,0 +1,39 @@
+{
+  "name": "Area",
+  "plural": "Areas",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "google_pin": {
+      "type": "string",
+      "required": true
+    },
+    "zone_id": {
+      "type": "number",
+      "required": true
+    },
+    "deleted": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    }
+
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }],
+  "methods": {}
+}

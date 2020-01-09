@@ -1,0 +1,275 @@
+<h1>New Order</h1>
+<style>
+</style>
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step>
+    <h3>Select Order Type</h3>
+    <div class="row">
+      <div class="col-md-4">
+        <button class="btn btn-primary form-control shadow" style="height:250px" (click)="gotoStep2(stepper, 1)" ><h2>New Order</h2></button>
+      </div>
+      <div class="col-md-4">
+          <button class="btn btn-primary form-control shadow" style="height:250px" (click)="gotoStep2(stepper, 2)" ><h2>Exchange</h2></button>
+      </div>
+      <div class="col-md-4">
+          <button class="btn btn-primary form-control shadow" style="height:250px" (click)="gotoStep2(stepper, 3)" ><h2>Refund</h2></button>
+      </div>
+    </div>
+  </mat-step>
+  <mat-step>
+      <h3>Fill customer information</h3>
+      <div class="row">
+        <div class="col-md-7">
+            <form [formGroup]="form1">
+            <div class="row">
+                <div class="col-md-4">Customer Phone</div>
+                <div class="col-md-8">
+                  <mat-form-field>
+                    <input matInput required formControlName="phone" placeholder="What's your phone number?">
+                  </mat-form-field>
+                  &nbsp;&nbsp;
+                  <button class="btn btn-primary" (click) = "onSearchCustomer()"><span class="fa fa-search"></span></button>
+                </div>                
+                <div class="col-md-4">Customer Name</div>
+                <div class="col-md-8">
+                  <mat-form-field>
+                    <input matInput required formControlName="name" placeholder="What's your name?">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">Zone</div>
+                <div class="col-md-8">
+                  <mat-form-field>
+                      <mat-select required formControlName="zone_id" (selectionChange) = "onSelectZone()">
+                          <mat-option *ngFor="let item of zoneList;trackBy item?.id" [value]="item.id">{{item.name}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">Area</div>
+                <div class="col-md-8">
+                  <mat-form-field>
+                      <mat-select required formControlName="area_id">
+                          <mat-option *ngFor="let item of areaList;trackBy item?.id" [value]="item.id">{{item.name}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">Address</div>
+                <div class="col-md-8">
+                  <mat-form-field>
+                    <input matInput required formControlName="address" placeholder="">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">Building</div>
+                <div class="col-md-8">
+                  <mat-form-field>
+                    <input matInput required formControlName="building" placeholder="">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">Floor</div>
+                <div class="col-md-8">
+                  <mat-form-field>
+                    <input matInput required formControlName="floor" placeholder="">
+                  </mat-form-field>
+                </div>
+            </div>
+            </form>
+            <div class="row">
+              <div class="col-md-6">
+                  <button class="btn btn-primary form-control" (click)="onUseAddress(stepper)">Use Address</button>
+              </div>
+              <div class="col-md-6">
+              </div>
+            </div>
+
+        </div>
+        <div class="col-md-5">
+          <h4>Customer Name {{name}}</h4>
+          <div *ngFor="let item of addressList;trackBy item?.id">
+            <hr>
+            <div class="row">
+              <div class="col-md-9">
+                <div class="row">
+                  <b>Zone:</b>{{item.zone.name}}
+                </div>
+                <div class="row">
+                  <b>Area:</b>{{item.area.name}}
+                </div>
+                <div class="row">
+                  <b>Address:</b>{{item.address}}
+                </div>
+                <div class="row">
+                  <b>Building:</b>{{item.building}}
+                </div>
+                <div class="row">
+                  <b>Floor:</b>{{item.floor}}
+                </div>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-lg btn-success" (click)="onChooseAddress(item)"><span class="fa fa-check"></span></button>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <button class="btn btn-primary form-control" (click)="onNewAddress()">New Address</button>
+        </div>
+        
+      </div>
+
+  </mat-step>    
+  <mat-step>
+      <h3>Fill order details</h3>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row" [hidden]="type==1">
+            <div class="col-md-4">Order Number</div>
+            <div class="col-md-8">
+              <mat-form-field>
+                <mat-select required [(ngModel)]="order_number" (selectionChange) = "onSearchOrder()">
+                  <mat-option *ngFor="let item of deliveredOrders;trackBy item?.id" [value]="item.id">{{item.id}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Delivery date</div>
+            <div class="col-md-8">
+                <mat-form-field>
+                    <input matInput required [matDatepicker]="picker" readonly placeholder="Choose a date" [(ngModel)]="delivery_date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">Delivery time</div>
+            <div class="col-md-8">
+                <mat-form-field style="width:100px">
+                    <input matInput atp-time-picker type="time" onlyHour="false" [(ngModel)]="delivery_time_from"  value="19:55">
+                </mat-form-field>
+                ~
+                <mat-form-field style="width:100px">
+                    <input matInput atp-time-picker type="time" onlyHour="false" [(ngModel)]="delivery_time_to"  value="19:55">
+                </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h4 align="center">Amounts to collect : <br/>{{value}} LL</h4>
+        </div>
+      </div>
+      <div class="row" [hidden]="type!=1">
+        <div class="col-md-3">List of Items</div>
+        <div class="col-md-9">
+            <table class="table table-striped table-bordered" style="border-color:white">
+                <thead>
+                  <tr class="table-primary">
+                    <th width="30%">Name</th>
+                    <th width="10%">Size</th>
+                    <th width="30%">Price</th>
+                    <th width="30%">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of sendItemList;let i = index;trackBy item?.id">  
+                      <td>{{item.name}}</td>
+                      <td>{{item.size}}</td>
+                      <td>{{item.price}}</td>
+                    <td>
+                      <button class="btn btn-danger" (click)="onDeleteItem(item.index)">
+                      <span class="fa fa-trash-o"></span> Remove
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="4">
+                        <button (click)="onAddItem()" class="btn btn-primary fa fa-plus form-control"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+        <div class="row" [hidden]="type!=2">
+          <div class="col-md-6">
+              <h5>Ordered Items</h5>
+              <table class="table table-striped table-bordered" style="border-color:white">
+                  <thead>
+                    <tr class="table-primary">
+                        <th width="10%"></th>
+                        <th width="40%">Name</th>
+                        <th width="20%">Size</th>
+                      <th width="30%">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of receiveItemList;let i = index;trackBy item?.id">
+                      <td><input type="checkbox" [(ngModel)]="item.checked" (change)="doCalcValue()" /></td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.size}}</td>
+                        <td>{{item.price}}</td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div class="col-md-6">
+              <h5>Exchange Items</h5>
+              <table class="table table-striped table-bordered" style="border-color:white">
+                  <thead>
+                    <tr class="table-primary">
+                      <th width="30%">Name</th>
+                      <th width="10%">Size</th>
+                      <th width="30%">Price</th>
+                      <th width="30%">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of sendItemList;let i = index;trackBy item?.id">  
+                        <td>{{item.name}}</td>
+                        <td>{{item.size}}</td>
+                        <td>{{item.price}}</td>
+                      <td>
+                        <button class="btn btn-danger" (click)="onDeleteItem(item.index)">
+                        <span class="fa fa-trash-o"></span> Remove
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <button (click)="onAddItem()" class="btn btn-primary fa fa-plus form-control"></button>
+                        </td>
+                      </tr>
+                      </tbody>
+              </table>
+          </div>
+        </div>
+
+        <div class="row" [hidden]="type!=3">
+            <div class="col-md-6">
+                <h5>Ordered Items</h5>
+                <table class="table table-striped table-bordered" style="border-color:white">
+                    <thead>
+                      <tr class="table-primary">
+                          <th width="10%"></th>
+                          <th width="40%">Name</th>
+                          <th width="20%">Size</th>
+                        <th width="30%">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of receiveItemList;let i = index;trackBy item?.id">
+                        <td><input type="checkbox" [(ngModel)]="item.checked" (change)="doCalcValue()" /></td>
+                          <td>{{item.name}}</td>
+                          <td>{{item.size}}</td>
+                          <td>{{item.price}}</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+
+        <div class="col-md-4">
+            <br/>
+            <br/>
+            <br/>
+            <button class="btn btn-success form-control" (click)="doCreateNewOrder()">Create New Order</button>
+        </div>
+  </mat-step>
+</mat-horizontal-stepper>
+

@@ -1,0 +1,123 @@
+{
+  "name": "Survey",
+  "plural": "Surveys",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "questions": {
+      "type": "string",
+      "required": true
+    },
+    "promo_name": {
+      "type": "string",
+      "required": false
+    },
+    "promo_description": {
+      "type": "string",
+      "required": false
+    },
+    "promo_code": {
+      "type": "string",
+      "required": false
+    },
+    "order_min": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "order_max": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "exchange_min": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "exchange_max": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "refund_min": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "refund_max": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "survey_min": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "survey_max": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "value_min": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "value_max": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "respondent_cnt": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "user_cnt": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "after_type": {
+      "type": "number",
+      "required": true,
+      "default" : 1
+    },
+    "deleted": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    }
+
+  },
+  "validations": [],
+  "relations": {
+    "answers": {
+      "type": "hasMany",
+      "model": "Answer",
+      "foreignKey": "survey_id"
+    }
+  },
+  "scope":{
+    "include" : [
+      "answers"
+    ]
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }],
+  "methods": {}
+}

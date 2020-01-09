@@ -1,0 +1,30 @@
+﻿<!-- nav -->
+<nav class="nav nav-tabs navbar-expand navbar-light bg-light shadow pt-2" *ngIf="currentUser">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/">Home</a>
+        <a class="nav-item nav-link" routerLink="/neworder">New Order</a>
+        <a class="nav-item nav-link" routerLink="/deliveries">All deliveries</a>
+        <a class="nav-item nav-link" routerLink="/drivers">Drivers</a>
+        <a class="nav-item nav-link" routerLink="/customers">Customers</a>
+        <a class="nav-item nav-link" routerLink="/finance">Finance</a>
+        <a class="nav-item nav-link" routerLink="/zones">Zones</a>
+        <a class="nav-item nav-link" routerLink="/survey">Survey</a>
+        <a class="nav-item nav-link" routerLink="/settings">Settings</a>
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+</nav>
+
+<!-- main app container -->
+    <div class="container shadow p-3 mb-5 bg-white rounded mt-5">
+        <div class="row">
+            <div class="col-sm-12 col-md-12" style="overflow-x:auto">
+                    <div *ngIf="wallet" class="float-right p-1 mb-1" align="center" style="border:1px solid;">
+                            <h5>Cash with fleet:</h5>
+                            <h5>{{wallet}} LL</h5>
+                    </div>
+                    <alert></alert>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+

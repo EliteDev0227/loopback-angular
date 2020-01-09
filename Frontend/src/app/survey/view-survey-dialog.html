@@ -1,0 +1,26 @@
+<h1>Survey name : {{survey.name}}</h1>
+<mat-dialog-content>
+  <table class="table table-striped table-bordered shadow" style="border-color:white">
+    <thead>
+      <tr class="table-primary">
+          <th width="10%">Customer name</th>
+          <th width="10%">Date in whitelist</th>
+          <th width="10%">Concerned Order Id</th>
+          <th width="10%">Status</th>
+          <th width="10%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of answerList;trackBy item?.id">  
+          <td>{{item.customer.name}}</td>
+          <td>{{item.white_date | date:"yyyy-MM-dd" }}</td>
+          <td>{{item.concerned_order_id}}</td>
+          <td>{{status_str[item.status]}}</td>
+          <td>
+              <button [hidden]="item.status!=0" class="btn btn-success" (click) = "onFillAnswer(item.id, item.customer.name)"><span class="fa fa-pencil"></span> Fill Answer</button>
+              <button [hidden]="item.status!=1" class="btn btn-info" (click) = "onFillAnswer(item.id, item.customer.name)"><span class="fa fa-pencil"></span> Update Answer</button>
+            </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>

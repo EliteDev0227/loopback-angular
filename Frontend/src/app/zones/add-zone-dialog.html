@@ -1,0 +1,21 @@
+<h3>Create new zone</h3>
+
+<form [formGroup]="form">
+<div class="row">
+    <div class="col-md-4">Zone Name</div>
+    <div class="col-md-8">
+      <mat-form-field>
+        <input matInput required formControlName="name" placeholder="What's your zone name?">
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">Zone Google PIN</div>
+    <div class="col-md-8">
+      <mat-form-field>
+          <input matInput required formControlName="google_pin" placeholder="What's your zone google pin?">
+      </mat-form-field>
+    </div>
+    <div class="col-md-12" align="center">
+      <button mat-raised-button (click)="onProceed()" class="btn btn-primary">Proceed</button>
+    </div>
+</div>
+</form>

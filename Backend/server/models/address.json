@@ -1,0 +1,80 @@
+{
+  "name": "Address",
+  "plural": "Addresses",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "zone_id": {
+      "type": "number",
+      "required": true
+    },
+    "area_id": {
+      "type": "number",
+      "required": true
+    },
+    "address": {
+      "type": "string",
+      "required": true
+    },
+    "building": {
+      "type": "string",
+      "required": true
+    },
+    "floor": {
+      "type": "string",
+      "required": true
+    },
+    "Long": {
+      "type": "string",
+      "required": false
+    },
+    "Lat": {
+      "type": "string",
+      "required": false
+    },
+    "picture": {
+      "type": "string",
+      "required": false
+    },
+    "customer_id": {
+      "type": "number",
+      "required": true
+    },
+    "deleted": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    }
+
+  },
+  "validations": [],
+  "relations": {
+    "zone": {
+      "type": "belongsTo",
+      "model": "Zone",
+      "foreignKey": "zone_id"
+    },
+    "area": {
+      "type": "belongsTo",
+      "model": "Area",
+      "foreignKey": "area_id"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }],
+  "methods": {},
+  "scope":{
+    "include" : [
+      "zone",
+      "area"
+    ]
+  }
+}

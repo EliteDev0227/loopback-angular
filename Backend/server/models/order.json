@@ -1,0 +1,122 @@
+{
+  "name": "Order",
+  "plural": "Orders",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "customer_id": {
+      "type": "number",
+      "required": true
+    },
+    "address_id": {
+      "type": "number",
+      "required": true
+    },
+    "delivery_date": {
+      "type": "date",
+      "required": true
+    },
+    "delivery_time_from": {
+      "type": "string",
+      "required": false
+    },    
+    "delivery_time_to": {
+      "type": "string",
+      "required": false
+    },    
+    "expected_time": {
+      "type": "string",
+      "required": false
+    },
+    "type": {
+      "type": "number",
+      "required": true
+    },
+    "status": {
+      "type": "number",
+      "default": 0,
+      "required": false
+    },
+    "pack_status": {
+      "type": "number",
+      "default": 0,
+      "required": false
+    },
+    "created_date": {
+      "type": "date",
+      "required": false
+    },
+    "delivered_date": {
+      "type": "date",
+      "required": false
+    },
+    "queue_id": {
+      "type": "number",
+      "required": false
+    },
+    "driver_id": {
+      "type": "number",
+      "required": false
+    },
+    "value": {
+      "type": "number",
+      "required": false
+    },
+    "travel_order": {
+      "type": "number",
+      "required": false
+    },
+    "deleted": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    },
+    "reason": {
+      "type": "string",
+      "required": false
+    }
+
+  },
+  "validations": [],
+  "relations": {
+    "items": {
+      "type": "hasMany",
+      "model": "Item",
+      "foreignKey": "order_id",
+      "options": {
+          "validate": true
+        }
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "customer_id"
+    },
+    "driver": {
+      "type": "belongsTo",
+      "model": "Driver",
+      "foreignKey": "driver_id"
+    },
+    "address": {
+      "type": "belongsTo",
+      "model": "Address",
+      "foreignKey": "address_id"
+    }
+  },
+  "scope":{
+    "include" : [
+      "items", "customer", "address", "driver"
+    ]
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }],
+  "methods": {}
+}

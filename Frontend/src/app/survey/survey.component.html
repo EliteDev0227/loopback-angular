@@ -1,0 +1,31 @@
+<h1>Survey</h1>
+<div class="float-left">
+  <button class="btn btn-success" (click)="addNewSurvey()"><span class="fa fa-plus"></span> Add New Survey</button>
+</div>
+
+  <table *ngIf="surveyList && surveyList.length" datatable [dtOptions]="dtOption" class="table table-striped table-bordered shadow" style="border-color:white">
+    <thead>
+      <tr class="table-primary">
+          <th width="10%">Survey ID</th>
+          <th width="30%">Survey Name</th>
+          <th width="10%">No of Respondents</th>
+          <th width="10%">No of users to survey</th>
+          <th width="40%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of surveyList;trackBy item?.id">  
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.respondent_cnt}}</td>
+          <td>{{item.user_cnt}}</td>
+          <td>
+              <button class="btn btn-danger" (click) = "onRemoveSurvey(item)"><span class="fa fa-trash"></span> Remove</button>
+              &nbsp;
+              <button class="btn btn-success" (click) = "onEnterSurvey(item)"><span class="fa fa-list"></span> Enter</button>
+              &nbsp;
+              <button class="btn btn-primary" (click) = "onDownloadResults(item)"><span class="fa fa-download"></span> Results</button>
+          </td>
+      </tr>
+    </tbody>
+  </table>

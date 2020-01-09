@@ -1,0 +1,93 @@
+{
+  "name": "Driver",
+  "plural": "Drivers",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "vehicle_type": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "salary": {
+      "type": "string",
+      "required": true
+    },
+    "bonus": {
+      "type": "string",
+      "required": true
+    },
+    "password": {
+      "type": "string",
+      "required": true
+    },
+    "picture": {
+      "type": "string",
+      "required": false
+    },
+    "queue_id": {
+      "type": "number",
+      "required": false, 
+      "default": -1
+    },
+    "main_wallet": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    },
+    "order_wallet": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    },
+    "online": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    },
+    "status": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    },
+    "cur_order_id": {
+      "type": "number",
+      "required": false,
+      "default" : -1
+    },
+    "step": {
+      "type": "number",
+      "required": false,
+      "default" : 1
+    },
+    "deleted": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    },    
+    "fcm": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }],
+  "methods": {}
+}

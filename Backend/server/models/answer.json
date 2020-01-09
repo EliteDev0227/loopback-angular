@@ -1,0 +1,62 @@
+{
+  "name": "Answer",
+  "plural": "Answers",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "customer_id": {
+      "type": "number",
+      "required": true
+    },
+    "survey_id": {
+      "type": "number",
+      "required": true
+    },
+    "white_date": {
+      "type": "date",
+      "required": true
+    },
+    "concerned_order_id": {
+      "type": "number",
+      "required": false
+    },
+    "answer": {
+      "type": "string",
+      "required": false
+    },
+    "status": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "customer_id"
+    },
+    "survey": {
+      "type": "belongsTo",
+      "model": "Survey",
+      "foreignKey": "survey_id"
+    }
+  },
+  "scope":{
+    "include" : [
+      "customer"
+    ]
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }],
+  "methods": {}
+}

@@ -1,0 +1,42 @@
+{
+  "name": "Wallet",
+  "plural": "Wallets",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "type": {
+      "type": "number",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "amount": {
+      "type": "number",
+      "required": true
+    },
+    "driver_id": {
+      "type": "number",
+      "required": true
+    }
+
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }],
+  "methods": {}
+}

@@ -1,0 +1,23 @@
+<h3>Add new area to zone</h3>
+<form [formGroup]="form">
+<div class="row">
+    <div class="col-md-4">Zone</div>
+    <div class="col-md-8">{{zone_name}}</div>
+    <br/>
+    <div class="col-md-4">Area Name</div>
+    <div class="col-md-8">
+      <mat-form-field>
+        <input matInput required formControlName="name" placeholder="What's your area name?">
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">Area PIN</div>
+    <div class="col-md-8">
+      <mat-form-field>
+          <input matInput required formControlName="google_pin" placeholder="What's your area google pin?">
+      </mat-form-field>
+    </div>
+    <div class="col-md-12" align="center">
+      <button mat-raised-button (click)="onProceed()" class="btn btn-primary">Proceed</button>
+    </div>
+</div>
+</form>

@@ -1,0 +1,31 @@
+<h3>{{mode}} queue</h3>
+<form [formGroup]="form">
+<div class="row">
+    <div class="col-md-4">Zone</div>
+    <div class="col-md-8">
+        <mat-form-field>
+            <mat-select required formControlName="zone_id">
+                <mat-option *ngFor="let item of zoneList;trackBy item?.id" [value]="item.id">{{item.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <br/>
+    <div class="col-md-4">Queue Day</div>
+    <div class="col-md-8">
+        <mat-form-field>
+            <input matInput required [matDatepicker]="picker" readonly placeholder="Choose a date" formControlName="queue_date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+    </div>
+    <div class="col-md-4">Queue start time</div>
+    <div class="col-md-8">
+      <mat-form-field>
+          <input matInput required atp-time-picker type="time" onlyHour="false" formControlName="start_time"/>
+      </mat-form-field>
+    </div>
+    <div class="col-md-12" align="center">
+      <button mat-raised-button (click)="onProceed()" class="btn btn-primary">Proceed</button>
+    </div>
+</div>
+</form>

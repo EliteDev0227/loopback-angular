@@ -1,0 +1,32 @@
+<h1>Edit Zone Areas</h1>
+<h3>Zone Name : {{zone_name}}</h3>
+
+    <div class="float-left">
+        <button class="btn btn-success" (click)="onAddArea()"><span class="fa fa-plus"></span> Add New Area</button>
+    </div>
+  <table *ngIf="areaList && areaList.length" datatable [dtOptions]="dtOption" class="table table-striped table-bordered shadow" style="border-color:white;">
+    <thead>
+      <tr class="table-primary">
+        <th width="10%">Area ID</th>
+        <th width="20%">Area Name</th>
+        <th width="40%">PIN Code</th>
+        <th width="30%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of areaList;trackBy item?.id">  
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.google_pin}}</td>
+        <td>
+            <button class="btn btn-info" (click)="onEditArea(item)">
+                <span class="fa fa-trash-o"></span> Edit
+            </button>
+            &nbsp;&nbsp;&nbsp;
+            <button class="btn btn-danger" (click)="onDeleteArea(item.id)">
+                <span class="fa fa-trash-o"></span> Remove
+            </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

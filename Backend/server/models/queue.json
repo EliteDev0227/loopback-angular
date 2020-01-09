@@ -1,0 +1,76 @@
+{
+  "name": "Queue",
+  "plural": "Queues",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "zone_id": {
+      "type": "number",
+      "required": true
+    },
+    "queue_date": {
+      "type": "date",
+      "required": true
+    },
+    "start_time": {
+      "type": "string",
+      "required": true
+    },
+    "driver_id": {
+      "type": "number",
+      "required": false
+    },
+    "status": {
+      "type": "number",
+      "required": false,
+      "default" : 1
+    },
+    "execute_time": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    },
+    "deleted": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    }
+  },
+  "relations": {
+    "orders": {
+      "type": "hasMany",
+      "model": "Order",
+      "foreignKey": "queue_id"
+    },    
+    "zone": {
+      "type": "belongsTo",
+      "model": "Zone",
+      "foreignKey": "zone_id"
+    }
+  },
+  "scope":{
+    "include" : [
+      {
+        "relation" : "orders", 
+        "scope" : {
+          "where" : { "status" : {"lt" : "3"}},
+          "order" : "travel_order ASC"
+        }
+      },
+      "zone"
+    ],
+    "order" : "status ASC"
+  },
+  "validations": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }],
+  "methods": {}
+}

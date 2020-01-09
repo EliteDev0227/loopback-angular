@@ -1,0 +1,35 @@
+<h1>Drivers</h1>
+<div class="float-left">
+    <button class="btn btn-success" (click)="addNewDriver()"><span class="fa fa-plus"></span> Add New Driver</button>
+</div>
+  <table *ngIf="driverList && driverList.length" datatable [dtOptions]="dtOption" class="table table-striped table-bordered shadow" style="border-color:white">
+    <thead>
+      <tr class="table-primary">
+          <th width="10%">Picture</th>
+          <th width="10%">Driver ID</th>
+          <th width="10%">Name</th>
+          <th width="10%">Vehicle type</th>
+          <th width="10%">Phone</th>
+          <th width="10%">Salary</th>
+          <th width="10%">Bonus</th>
+          <th width="10%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of driverList;trackBy item?.id">  
+          <td><img src="{{apiBaseUrl}}/containers/profile/download/{{item.picture}}" style="max-width:90px; max-height:120px;"/></td>
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.vehicle_type}}</td>
+          <td>{{item.phone}}</td>
+          <td>{{item.salary}}</td>
+          <td>{{item.bonus}}</td>
+          <td><button class="btn btn-danger" (click)="onDeleteDriver(item)">
+              <span class="fa fa-trash-o"></span> Remove
+              </button>&nbsp;
+              <button class="btn btn-info" (click)="onEditDriver(item.id)">
+                  <span class="fa fa-pencil"></span> Edit
+                  </button>
+      </tr>
+    </tbody>
+  </table>

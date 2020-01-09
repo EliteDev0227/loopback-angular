@@ -1,0 +1,110 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+  "user": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "AccessToken": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mysqldb",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+
+  "container": {
+    "dataSource": "storage",
+    "public": true
+  },
+
+
+  "Zone": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "Area": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "Customer": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "Address": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "Driver": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "DriverApi": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "DispatcherApi": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "Order": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "Item": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "Queue": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "Setting": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "Wallet": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "Survey": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "Answer": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "GeoAPI": {
+    "dataSource": "geoRest",
+    "public": true
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "name": "Item",
+  "plural": "Items",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "size": {
+      "type": "string",
+      "required": true
+    },
+    "price": {
+      "type": "number",
+      "required": true
+    },
+    "type": {
+      "type": "number",
+      "required": true
+    },
+    "status": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    },
+    "order_id": {
+      "type": "number",
+      "required": true
+    },
+    "refund": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    },
+    "org_id": {
+      "type": "number",
+      "required": false
+    }
+
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }],
+  "methods": {}
+}

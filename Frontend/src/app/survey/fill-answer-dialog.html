@@ -1,0 +1,15 @@
+<h1>Survey Name : {{survey.name}}</h1>
+<h3>Customer Name : {{customer_name}}</h3>
+<mat-dialog-content>
+    <div id="question_holder">
+    </div>
+    <h4>Promotion - {{survey.promo_name}}</h4>
+    Promotion Code : {{survey.promo_code}}
+    <br>
+    Offer the following promotion.
+    <br>
+    {{survey.promo_description}}
+</mat-dialog-content>
+<div mat-dialog-action>
+    <button (click)="onSaveAnswer()" class="btn btn-success form-control"><span class="fa fa-plus"></span> Save Answer</button>
+</div>

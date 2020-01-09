@@ -1,0 +1,37 @@
+{
+  "name": "user",
+  "plural": "users",
+  "base": "User",
+  "inheritAcls": false, 
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+
+    "email": {
+      "type": "string",
+      "required": false
+    },
+    "username": {
+      "type": "string",
+      "required": true
+    },
+    "driver_id": {
+      "type": "number",
+      "required": false
+    }
+  },
+  "validations": [],
+
+  "acls": [
+      [ 
+        { "principalType": "ROLE", "principalId": "$everyone", "permission": "DENY" }, 
+        { "principalType": "ROLE", "principalId": "$everyone", "permission": "ALLOW", "property": "create" }, 
+        { "principalType": "ROLE", "principalId": "$everyone", "permission": "ALLOW", "property": "login" },  
+        { "principalType": "ROLE", "principalId": "$everyone", "permission": "ALLOW", "property": "logout" },  
+        { "principalType": "ROLE", "principalId": "$owner", "permission": "ALLOW", "property": "updateAttributes" }, 
+        { "principalType": "ROLE", "principalId": "$everyone", "permission": "ALLOW", "property": "confirm" }]
+  ],
+  "methods": {}
+}

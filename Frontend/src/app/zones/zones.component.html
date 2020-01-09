@@ -1,0 +1,33 @@
+<h1>Zones</h1>
+
+    <div class="float-left">
+        <button class="btn btn-success" (click)="addNewZone()"><span class="fa fa-plus"></span> Add New Zone</button>
+    </div>
+  <table *ngIf="zonesList && zonesList.length" datatable [dtOptions]="dtOption" class="table table-striped table-bordered shadow" style="border-color:white;">
+    <thead>
+      <tr class="table-primary">
+        <th width="10%">Zone ID</th>
+        <th width="20%">Zone Name</th>
+        <th width="40%">Zone Areas</th>
+        <th width="30%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of zonesList;trackBy item?.id">  
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.areaString}}</td>
+        <td>
+            <button class="btn btn-info" (click)="onEditZone(item.id, item.name)">
+                <span class="fa fa-pencil"></span> Edit
+            </button>&nbsp;&nbsp;
+            <button class="btn btn-info" (click)="addAreaToZone(item.id, item.name)">
+                <span class="fa fa-list"></span> Add areas
+            </button>&nbsp;&nbsp;
+            <button class="btn btn-danger" (click)="onDeleteZone(item.id)">
+                <span class="fa fa-trash-o"></span> Remove
+            </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

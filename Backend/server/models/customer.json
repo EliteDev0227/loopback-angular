@@ -1,0 +1,74 @@
+{
+  "name": "Customer",
+  "plural": "Customers",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "order_cnt": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "exchange_cnt": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "refund_cnt": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "survey_cnt": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "avg_value": {
+      "type": "number",
+      "required": true,
+      "default" : 0
+    },
+    "deleted": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    },
+    "last_order_id": {
+      "type": "number",
+      "required": false
+    }
+  },
+  "relations": {
+    "addresses": {
+      "type": "hasMany",
+      "model": "Address",
+      "foreignKey": "customer_id"
+    }
+  },
+  "scope":{
+    "include" : [
+      "addresses"
+    ]
+  },
+  "validations": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }],
+  "methods": {}
+}

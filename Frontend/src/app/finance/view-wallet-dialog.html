@@ -1,0 +1,36 @@
+<h3>{{title}}</h3>
+
+<mat-dialog-content>
+    <div class="float-left">
+        <mat-form-field>
+            <input matInput required [matDatepicker]="picker1" readonly placeholder="Choose start date" [(ngModel)]="start_date" (ngModelChange)="onDateRangeChange()" >
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        -
+        <mat-form-field>
+            <input matInput required [matDatepicker]="picker2" readonly placeholder="Choose end date" [(ngModel)]="end_date" (ngModelChange)="onDateRangeChange()" >
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+    </div>
+<table *ngIf="walletList && walletList.length" datatable [dtOptions]="dtOption" class="table table-striped table-bordered shadow" style="border-color:white">
+    <thead>
+      <tr class="table-primary">
+          <th width="10%">Date</th>
+          <th width="10%">Description</th>
+          <th width="10%">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of walletList;trackBy item?.id">  
+          <td>{{item.date | date:"yyyy-MM-dd" }}</td>
+          <td>{{item.description}}</td>
+          <td>{{item.amount}}</td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>
+<div class="mat-dialog-action">
+    <button (click)="onNewEntry()" class="btn btn-primary form-control"> New Manual Entry</button>
+</div>

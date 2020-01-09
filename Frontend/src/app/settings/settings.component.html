@@ -1,0 +1,84 @@
+
+<h3>General Settings</h3>
+<div class="row">
+<div class="col-md-6">
+    <div class="row">
+    <div class="col-md-4">Avg. time to drop-off Order</div>
+    <div class="col-md-8">
+      <mat-form-field>
+        <input type="number" matInput required [(ngModel)]="TIME_PER_ORDER" placeholder="">
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">Avg. time to drop-off Exchange</div>
+    <div class="col-md-8">
+      <mat-form-field>
+        <input type="number" matInput required [(ngModel)]="TIME_PER_EXCHANGE" placeholder="">
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">Avg. time to drop-off Refund</div>
+    <div class="col-md-8">
+      <mat-form-field>
+        <input type="number" matInput required [(ngModel)]="TIME_PER_REFUND" placeholder="">
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">Max number of orders per bike</div>
+    <div class="col-md-8">
+      <mat-form-field>
+        <input type="number" matInput required [(ngModel)]="ORDERS_PER_BIKE" placeholder="">
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">Max number of orders per car</div>
+    <div class="col-md-8">
+      <mat-form-field>
+        <input type="number" matInput required [(ngModel)]="ORDERS_PER_CAR" placeholder="">
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">Maximum orders cash / driver</div>
+    <div class="col-md-8">
+      <mat-form-field>
+        <input type="number" matInput required [(ngModel)]="CASH_PER_DRIVER" placeholder="">
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">Allowed zones with bikes</div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-3" *ngFor="let item of zoneList">
+            <mat-checkbox class="example-margin" [(ngModel)]="item.bike_able">{{item.name}}</mat-checkbox>
+        </div>
+      </div>
+      
+    </div>
+    <div class="col-md-4">Warehouse coordinates</div>
+    <div class="col-md-8">
+      <mat-form-field>
+        <input matInput required [(ngModel)]="WAREHOUSE_POS" placeholder="">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6" align="center">
+      <button mat-raised-button (click)="onSave()" class="btn btn-primary form-control">Save</button>
+    </div>
+  </div>
+</div>
+<div class="col-md-6">
+    <h3>Change Admin Password</h3>
+    <div class="row">
+      <div class="col-md-4">New Password</div>
+      <div class="col-md-8">
+        <mat-form-field>
+          <input type="password" matInput required [(ngModel)]="password" placeholder="">
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">Retype Password</div>
+      <div class="col-md-8">
+        <mat-form-field>
+          <input type="password" matInput required [(ngModel)]="retype" placeholder="">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+          <button mat-raised-button (click)="onResetPassword()" class="btn btn-danger form-control">
+            <span class="fa fa-lock"></span> Reset Password
+          </button>
+        </div>
+      </div>
+</div>
+</div>

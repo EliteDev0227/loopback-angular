@@ -1,0 +1,28 @@
+<h3>New manual Entry</h3>
+<form [formGroup]="form">
+<div class="row">
+    <div class="col-md-4">Date</div>
+    <div class="col-md-8">
+      <mat-form-field>
+          <input matInput required [matDatepicker]="picker" readonly placeholder="Choose a date" formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">Description</div>
+    <div class="col-md-8">
+      <mat-form-field>
+          <input matInput required formControlName="description" placeholder="">
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">Amount</div>
+    <div class="col-md-8">
+      <mat-form-field>
+          <input matInput type="number" required formControlName="amount" placeholder="">
+      </mat-form-field>
+    </div>
+    <div class="col-md-12" align="center">
+      <button mat-raised-button (click)="onProceed()" class="btn btn-primary">Proceed</button>
+    </div>
+</div>
+</form>

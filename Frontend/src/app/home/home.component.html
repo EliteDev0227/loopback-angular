@@ -1,0 +1,167 @@
+<h1>Home</h1>
+<br/>
+<div cdkDropListGroup>
+  <div class="row">
+    <div class="example-container col-md-2 col-sm-2">
+      <h4>Unassigned Orders</h4>
+      <hr>
+      <div *ngFor="let zone of zoneList">
+        {{zone.name}}
+        <div *ngIf="unassignedOrderList && unassignedOrderList[zone.id]"
+          cdkDropList
+          [cdkDropListData]="unassignedOrderList[zone.id]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of unassignedOrderList[zone.id].slice(1)" cdkDrag (click) = "onDetailOrder(item, 1)">
+            <div class="row" *ngIf="item.address.zone_id==zone.id">
+              <div class="col-md-12">Order #{{item.id}} - {{item.delivery_date | date:"yyyy-MM-dd" }}</div>
+              <div class="col-md-12">{{item.customer.name}}</div>
+              <div class="col-md-12">
+                {{item.value}} LL
+                <div class="float-right">
+                    <span *ngIf="item.type==1" class="badge badge-primary">New</span>
+                    <span *ngIf="item.type==2" class="badge badge-info">Exchange</span>
+                    <span *ngIf="item.type==3" class="badge badge-danger">Refund</span>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4>Failed Orders</h4>
+      <hr>
+<!--      <div
+        cdkDropList
+        [cdkDropListData]="failedOrderList"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)"> -->
+      <div class="example-list">
+        <div class="example-box" *ngFor="let item of failedOrderList" (click) = "onDetailOrder(item, 2)">
+            <div class="row">
+                <div class="col-md-12">Order #{{item.id}} - {{item.delivery_date | date:"yyyy-MM-dd" }}</div>
+                <div class="col-md-12">{{item.customer.name}}</div>
+                <div class="col-md-12">
+                  {{item.value}} LL
+                  <div class="float-right">
+                      <span *ngIf="item.type==1" class="badge badge-primary">New</span>
+                      <span *ngIf="item.type==2" class="badge badge-info">Exchange</span>
+                      <span *ngIf="item.type==3" class="badge badge-danger">Refund</span>
+                    </div>
+                </div>
+              </div>
+    
+        </div>
+      </div>
+
+      <h4>Rejected Orders</h4>
+      <hr>
+      <div class="example-list">
+        <div class="example-box" *ngFor="let item of rejectedOrderList" (click) = "onDetailOrder(item, 2)">
+            <div class="row">
+                <div class="col-md-12">Order #{{item.id}} - {{item.delivery_date | date:"yyyy-MM-dd" }}</div>
+                <div class="col-md-12">{{item.customer.name}}</div>
+                <div class="col-md-12">
+                  {{item.value}} LL
+                  <div class="float-right">
+                      <span *ngIf="item.type==1" class="badge badge-primary">New</span>
+                      <span *ngIf="item.type==2" class="badge badge-info">Exchange</span>
+                      <span *ngIf="item.type==3" class="badge badge-danger">Refund</span>
+                    </div>
+                </div>
+              </div>
+    
+        </div>
+      </div>
+
+
+    </div>
+  
+    <div class="example-container col-md-9 col-sm-9">
+        <button class="btn btn-success float-right" (click)="onNewQueue()"><span class="fa fa-plus"></span> Add New Queue</button>
+        <h3>List of Queues</h3>
+        <div style="overflow-y:auto; height:600px;">
+        <div *ngFor="let indexDate of dateList; let i = index">
+            <span class="alert-primary form-control">{{indexDate.queue_date | date : "yyyy-MM-dd"}}</span>
+            <div style="overflow-x:auto;" *ngIf="(stoppedQueueList && stoppedQueueList[indexDate.queue_date]) || (runningQueueList && runningQueueList[indexDate.queue_date])">
+            <table>
+            <tr>
+                <td *ngFor="let item of stoppedQueueList[indexDate.queue_date]" style="vertical-align: top; padding:3px">
+                    <div (click)="onEditQueue(item)">
+                      {{item.zone.name}}
+                      <div class="float-right">{{item.start_time}}</div>
+                    </div>
+                    <hr>
+                    <div
+                    cdkDropList
+                    [cdkDropListData]="item.orders"
+                    class="example-list"
+                    (cdkDropListDropped)="drop($event)">
+                      <div class="example-box" *ngFor="let order of item.orders.slice(1);" cdkDrag>
+                          <div class="row">
+                              <div class="col-md-12">
+                                Order #{{order.id}} - {{order.delivery_date | date:"yyyy-MM-dd" }}
+                                <div class="float-right">
+                                    <button class="btn btn-sm btn-danger fa fa-trash" (click)="onRemoveOrderFromQueue(item.orders, order)"></button>
+                                </div>
+                              </div>
+                              <div class="col-md-12">{{order.customer.name}}</div>
+                              <div class="col-md-12">
+                                {{order.value}} LL
+                                <div class="float-right">
+                                    <span *ngIf="order.type==1" class="badge badge-primary">New</span>
+                                    <span *ngIf="order.type==2" class="badge badge-info">Exchange</span>
+                                    <span *ngIf="order.type==3" class="badge badge-danger">Refund</span>
+                                </div>
+                              </div>
+                            </div>
+                  
+                      </div>
+                    </div>
+                    <div class="badge badge-primary form-control" *ngIf="item.status == 1">
+                      <p style="color:white; font-size:25px;" align="center" (click)="onExecute(item, item.orders.slice(1))">Execute</p>
+                    </div>
+                    <div class="badge badge-danger form-control" *ngIf="item.status == 1">
+                      <p style="color:white; font-size:25px;" align="center" (click)="onRemove(item.id)">Remove</p>
+                    </div>
+                </td>
+                <td *ngFor="let item of runningQueueList[indexDate.queue_date]" style="vertical-align: top; padding:3px">
+                    {{item.zone.name}}
+                    <hr>
+                    <div class="example-list">
+                      <div class="example-box" *ngFor="let order of item.orders" (click) = "onDetailOrder(order, 3)" >
+                          <div class="row">
+                              <div class="col-md-12">Order #{{order.id}} - {{order.delivery_date | date:"yyyy-MM-dd" }}</div>
+                              <div class="col-md-12">
+                                {{order.customer.name}}
+                                <div class="float-right">
+                                    {{order.expected_time}}
+                                  </div>
+                              </div>
+                              <div class="col-md-12">
+                                {{order.value}} LL
+                                <div class="float-right">
+                                    <span *ngIf="order.type==1" class="badge badge-primary">New</span>
+                                    <span *ngIf="order.type==2" class="badge badge-info">Exchange</span>
+                                    <span *ngIf="order.type==3" class="badge badge-danger">Refund</span>
+                                  </div>
+                              </div>
+                            </div>
+                      </div>
+                    </div>
+                    <div class="badge badge-danger form-control" *ngIf="item.status == 2">
+                        <p style="color:white; font-size:25px;" align="center" (click)="onStop(item.id)">Stop</p>
+                    </div>
+                    <div class="badge badge-success form-control" *ngIf="item.status == 3">
+                        <p style="color:white; font-size:25px;" align="center">Running</p>
+                    </div>
+                </td>
+              </tr>
+          </table>
+          <br/>
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>

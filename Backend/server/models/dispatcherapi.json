@@ -1,0 +1,14 @@
+{
+  "name": "DispatcherApi",
+  "plural": "DispatcherApi",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

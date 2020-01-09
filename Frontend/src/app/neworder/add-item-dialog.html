@@ -1,0 +1,28 @@
+<h3>Add New Item</h3>
+<form [formGroup]="form">
+  <div class="row">
+
+        <div class="col-md-4">Name</div>
+        <div class="col-md-8">
+          <mat-form-field>
+            <input matInput required formControlName="name" placeholder="What's item name?">
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">Size</div>
+        <div class="col-md-8">
+          <mat-form-field>
+            <input matInput required formControlName="size" placeholder="What size is it?">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">Price</div>
+        <div class="col-md-8">
+          <mat-form-field>
+            <input matInput required type="number" formControlName="price" placeholder="How much is it?">
+          </mat-form-field>
+        </div>
+        <div class="col-md-12" align="center">
+          <button mat-raised-button (click)="onProceed()" class="btn btn-primary">Proceed</button>
+        </div>
+  </div>
+</form>

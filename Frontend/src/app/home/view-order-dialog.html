@@ -1,0 +1,78 @@
+<h3>Order #{{orderItem.id}}</h3>
+      <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                    <div class="col-md-6">Name: {{orderItem.customer.name}}</div>
+                    <div class="col-md-6">Phone: {{orderItem.customer.phone}}</div>
+                    <div class="col-md-6">Zone: {{orderItem.address.zone.name}}</div>
+                    <div class="col-md-6">Area: {{orderItem.address.area.name}}</div>
+                    <div class="col-md-12">Address: {{orderItem.address.address}} {{orderItem.address.building}} {{orderItem.address.floor}}</div>
+                    <div class="col-md-12" *ngIf="mode == 3">
+                      Expected Delivery Time: {{orderItem.expected_time}}
+                    </div>
+                    <div class="col-md-12" *ngIf="orderItem.status==4">
+                        <p style="color:red;">Reason: {{orderItem.reason}}</p>
+                    </div>
+                    <div class="col-md-12" *ngIf="!orderItem.reason && orderItem.pack_status==2">
+                        <p style="color:red;">Reason: Items not in stock</p>
+                    </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+          <h4 align="center">Amounts to collect : <br/>{{orderItem.value}} LL</h4>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-12">
+                <hr>
+          </div>
+      </div>
+      <div class="row" >
+        <div class="col-md-3">List of Items</div>
+        <div class="col-md-9">
+            <table class="table table-striped table-bordered" style="border-color:white">
+                <thead>
+                  <tr class="table-primary">
+                    <th width="30%">Name</th>
+                    <th width="10%">Size</th>
+                    <th width="30%">Price</th>
+                    <th width="30%">Status</th>
+                    <th width="30%">Type</th>
+                    <th width="30%" *ngIf="mode < 3">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of orderItem.items;let i = index;trackBy item?.id">  
+                      <td>{{item.name}}</td>
+                      <td>{{item.size}}</td>
+                      <td>{{item.price}} LL</td>
+                      <td>{{statusStr[item.status]}}</td>
+                      <td>{{typeStr[item.type]}}</td>
+                    <td  *ngIf="mode < 3">
+                      <button class="btn btn-danger" (click)="onDeleteItem(item.id)">
+                      <span class="fa fa-trash-o"></span> Remove
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                      <td colspan="6">
+                          <button (click)="onAddItem()" class="btn btn-primary fa fa-plus form-control"></button>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+          <div class="col-md-4" *ngIf="mode < 3">
+              <button class="btn btn-primary form-control" (click)="onUpdateItems()">Update Items</button>
+          </div>
+          <div class="col-md-4" *ngIf="mode == 2">
+              <button class="btn btn-primary form-control" (click)="onHoldOrder()">Hold Order</button>
+          </div>
+          <div class="col-md-4" *ngIf="mode < 3">
+              <button class="btn btn-primary form-control" (click)="onCancelOrder()">Cancel Order</button>
+          </div>
+          <div class="col-md-4" *ngIf="mode == 3">
+                <button class="btn btn-success form-control" (click)="onMarkArrived()">Mark as Arrived</button>
+          </div>
+
+        </div>

@@ -1,0 +1,133 @@
+<h1>Create New Survey</h1>
+<style>
+mat-form-field{
+  width : 50px;
+}
+</style>
+<mat-dialog-content>
+<form [formGroup]="form">
+  <div class="row">
+      <div class="col-md-4"><h3>Survey Name</h3></div>
+      <div class="col-md-8">
+        <mat-form-field style="width:100%">
+          <input matInput required formControlName="name" placeholder="">
+        </mat-form-field>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12">
+        <h3>Survey Target</h3>
+        <hr>
+      </div>
+      <div class="col-md-11 offset-md-1">
+        <div class="row">
+            <div class="col-md-3">No of Orders</div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <input type="number" matInput required formControlName="order_min" placeholder="">
+              </mat-form-field>-
+              <mat-form-field>
+                <input type="number" matInput required formControlName="order_max" placeholder="">
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">No of Surveys</div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <input type="number" matInput required formControlName="survey_min" placeholder="">
+              </mat-form-field>-
+              <mat-form-field>
+                <input type="number" matInput required formControlName="survey_max" placeholder="">
+              </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+              <mat-slide-toggle [checked]=true (change)="onToggleExchange($event)">
+                No of Exchanges
+              </mat-slide-toggle>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <input type="number" matInput required formControlName="exchange_min" placeholder="">
+              </mat-form-field>-
+              <mat-form-field>
+                <input type="number" matInput required formControlName="exchange_max" placeholder="">
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-slide-toggle [checked]=true (change)="onToggleRefund($event)">
+                    No of Refund
+                </mat-slide-toggle>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <input type="number" matInput required formControlName="refund_min" placeholder="">
+              </mat-form-field>-
+              <mat-form-field>
+                <input type="number" matInput required formControlName="refund_max" placeholder="">
+              </mat-form-field>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-md-3">Avg. value/order</div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <input type="number" matInput required formControlName="value_min" placeholder="">
+              </mat-form-field>-
+              <mat-form-field>
+                <input type="number" matInput required formControlName="value_max" placeholder="">
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">After</div>
+            <div class="col-md-3">
+                <mat-form-field style="width:100px">
+                  <mat-select required formControlName="after_type">
+                      <mat-option [value]="1">New Order</mat-option>
+                      <mat-option [value]="2">Exchange</mat-option>
+                      <mat-option [value]="3">Refund</mat-option>
+                  </mat-select>
+                </mat-form-field>
+      </div>
+        </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12">
+        <h3>Survey Content</h3>
+        <hr>
+      </div>
+      <div class="col-md-11 offset-md-1">
+              <ck-editor [config]="ckEditorConfig" name="editor1" formControlName="editorValue" required skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
+        <br/>
+      </div>
+  </div> 
+  <div class="row">
+      <div class="col-md-12">
+        <h3>Survey Promotion</h3>
+        <hr>
+      </div>
+      <div class="col-md-4">Promotion name</div>
+      <div class="col-md-8">
+        <mat-form-field style="width:100%">
+          <input matInput formControlName="promo_name" placeholder="">
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">Promotion description</div>
+      <div class="col-md-8">
+        <mat-form-field style="width:100%">
+          <textarea matInput formControlName="promo_description"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">Promotion code</div>
+      <div class="col-md-8">
+        <mat-form-field style="width:100%">
+          <input matInput formControlName="promo_code" placeholder="">
+        </mat-form-field>
+      </div>
+
+  </div>
+</form>
+</mat-dialog-content>
+<div mat-dialog-actions class="col-md-4">
+  <button class="btn btn-success form-control" (click)="onCreate()"><span class="fa fa-plus"></span> Create</button>
+</div>

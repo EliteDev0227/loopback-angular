@@ -1,0 +1,50 @@
+{
+  "name": "Zone",
+  "plural": "Zones",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "google_pin": {
+      "type": "string",
+      "required": true
+    },
+    "bike_able": {
+      "type": "number",
+      "required": false,
+      "default" : 1
+    },
+    "deleted": {
+      "type": "number",
+      "required": false,
+      "default" : 0
+    }
+  },
+  "relations": {
+    "areas": {
+      "type": "hasMany",
+      "model": "Area",
+      "foreignKey": "zone_id"
+    }
+  },
+  "scope":{
+    "include" : [
+      "areas"
+    ]
+  },
+  "validations": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }],
+  "methods": {}
+}

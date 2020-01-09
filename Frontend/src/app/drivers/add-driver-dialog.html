@@ -1,0 +1,57 @@
+<h3>{{title}}</h3>
+
+<form [formGroup]="form1">
+  <div class="row">
+          <div class="col-md-4">Picture</div>
+      <div class="col-md-8">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <input type="file" style="width:200px;" name="avatar" (change)="onFileChange($event)" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*"/>
+              <button type="submit" class="btn btn-success btn-xs"><span class="fa fa-upload"></span></button>
+          </form>
+          <img src="{{picture_url}}" style="max-width:150px; max-height:200px;" />
+      </div>
+    
+      <div class="col-md-4">Name</div>
+      <div class="col-md-8">
+        <mat-form-field>
+          <input matInput required formControlName="name" placeholder="What's your name?">
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">Vehicle Type</div>
+      <div class="col-md-8">
+        <mat-form-field>
+            <mat-select required formControlName="vehicle_type">
+                <mat-option value="CAR">CAR</mat-option>
+                <mat-option value="BIKE">BIKE</mat-option>
+              </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">Phone</div>
+      <div class="col-md-8">
+        <mat-form-field>
+          <input matInput required formControlName="phone" placeholder="What's your phone number?">
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">Salary/day</div>
+      <div class="col-md-8">
+        <mat-form-field>
+          <input matInput required formControlName="salary" placeholder="How much is salary per day?">
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">Bonus/order</div>
+      <div class="col-md-8">
+        <mat-form-field>
+          <input matInput required formControlName="bonus" placeholder="How much is bonus per order?">
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">Password</div>
+      <div class="col-md-8">
+        <mat-form-field>
+          <input matInput required formControlName="password" placeholder="What's your password?">
+        </mat-form-field>
+      </div>
+      <div class="col-md-12" align="center">
+        <button mat-raised-button (click)="onProceed()" class="btn btn-primary">Proceed</button>
+      </div>
+  </div>
+</form>
