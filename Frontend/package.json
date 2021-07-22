@@ -41,7 +41,7 @@
     "pdfmake": "^0.1.54",
     "rxjs": "~6.3.3",
     "socket.io-client": "^2.2.0",
-    "xlsx": "^0.14.2",
+    "xlsx": "^0.17.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
